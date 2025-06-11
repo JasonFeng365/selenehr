@@ -5,6 +5,12 @@ import sys
 
 import json
 
+from compileStatement import compile
+import problemid
+
+import dotenv
+import os
+
 def log(string):
 	print(f"[{bcolors.OKGREEN}HR{bcolors.OKBLUE}CLI{bcolors.ENDC}] {string}")
 
@@ -16,11 +22,6 @@ def getJson(path):
 def absPath(path):
 	return f'{str(pathlib.Path().resolve())}/{path}'
 
-from compileStatement import compile
-import problemid
-
-import dotenv
-import os
 dotenv.load_dotenv()
 session = os.getenv("SESSION")
 
