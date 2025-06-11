@@ -1,0 +1,6 @@
+{
+	"statement": "You are given a list $a_1,a_2,...a_n$ of $n$ unique prime numbers and limit $k$. Compute the number of integers in the inclusive range $[1,k]$ that are multiples of one or more primes from the list.",
+	"inputFormat": "The first line of input is two integers $n$ and $k$.\n\nThe second line of input is $n$ space-separated integers: the list of integers.",
+	"constraints": "* $1 \\le n \\le 20$\n* $1 \\le k \\le 10^9$\n* $2 \\le a_i \\le 100, \\space a_i \\text{ is prime}$",
+	"outputFormat": "Output a single integer: the number of integers in the inclusive range $[1,k]$ that are multiples of one or more integers of the list."
+}
