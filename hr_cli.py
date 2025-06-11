@@ -26,7 +26,7 @@ session = os.getenv("SESSION")
 
 def gentests(path, args):
 	log("Generating testcases...")
-	cmd = f'gen "{path}"'
+	cmd = f'python gen.py "{path}"'
 	os.system(cmd)
 
 def ziptests(path, args):
