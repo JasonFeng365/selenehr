@@ -18,6 +18,17 @@ Along with `selene_hr.py`, the actual Selenium wrapper, this repository has a sm
 
 `selene_hr.py` is the file containing the actual Selenium wrapper. It contains a `SeleneHR` class, which can be used elsewhere to automatically update or upload problems and testcases. See `hr_cli.py` for sample usage.
 
+Constructor: requires the content of a HackerRank cookie as a string. Also, logging can be toggled.
+
+`createNewProblem`: Upload a problem statement to HackerRank under a new problem. All fields are required to create a new problem; errors and warnings will pop up if fields are incorrect or missing. This function returns the newly-created problem's ID.
+
+`editProblemDetails`: Update an existing problem's statement and/or difficulty. Fields are optional; if any field is empty, it is ignored when editing the problem.
+
+`uploadTestcases`: Upload a `.zip` containing some amount of testcases to a problem. This function takes in the problem's ID, and a filepath to the `.zip`. The `.zip` file must exactly follow HackerRank's testcase specifications; see the sample problem for an example.
+This function may optionally specify how many testcases should be marked as sample testcases as `samples`. Additionally, a map of zero-indexed integer:string `sampleDataMap` can be passed in, to add explanations for sample testcases; for each sample testcase, if its index appears in `sampleDataMap`, the corresponding string is added to the input. There is currently no support for uploading images with text, besides manually hosting the image and adding the link in Markdown format.
+
+`close`: Close the Selenium window. After this function is called, this object can no longer be used.
+
 ### hr_cli.py
 
 This is a CLI I use for ease of editing problem statements and testcases, along with uploading them to HackerRank. It has commands for testcase generation, problem statement parsing, uploading new problems, and updating existing problems. Every command requires the directory of the problem to be passed in afterwards. Commands are as follows:
@@ -42,11 +53,11 @@ This is a CLI I use for ease of editing problem statements and testcases, along 
 
 `hr tu "sample\Euler's Multiples Redux"`
 
-`mdparse`/`md`: Parse an existing Markdown file into `hr_info/statement.json`. Fields are `statement`, `inputFormat`, `constraints`, and `outputFormat`. Please edit `compileStatement.py` to make a custom parser.
+`mdparse`/`md`: Parse an existing Markdown file into `hr_info/statement.json`. Fields are `statement`, `inputFormat`, `constraints`, and `outputFormat`. You can edit `compileStatement.py` to make a custom parser.
 
 `hr md "sample\Euler's Multiples Redux"`
 
-`upload`: Upload a problem statement into HackerRank, using SeleneHR. If the problem is missing a `hr_info/hr_pid.txt` file, creates a new problem. Otherwise, updates the problem with HackerRank ID matching the ID inside the text file. Requires `hr_info/statement.json`.
+`upload`: Upload a problem statement into HackerRank, using SeleneHR. If the problem is missing a `hr_info/hr_pid.txt` file, creates a new problem and creates `hr_info/hr_pid.txt` with the new problem's ID. Otherwise, updates the problem with HackerRank ID matching the ID inside the text file. Requires `hr_info/statement.json`.
 
 `hr upload "sample\Euler's Multiples Redux"`
 
